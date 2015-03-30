@@ -77,7 +77,8 @@ class EzPublishKernel extends Kernel
             new NelmioCorsBundle(),
             new KnpMenuBundle(),
             new OneupFlysystemBundle(),
-            new EzSystemsPlatformInstallerBundle()
+            new EzSystemsPlatformInstallerBundle(),
+            new eZ\Bundle\EzPublishLegacyBundle\EzPublishLegacyBundle( $this )
         );
 
         switch ( $this->getEnvironment() )

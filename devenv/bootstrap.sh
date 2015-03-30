@@ -4,7 +4,7 @@
 apt-get update
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get install -q -y apache2 curl php5 mysql-server-5.5 php5-mysql php5-gd php5-xsl php5-intl php5-curl php-apc imagemagick pwgen
+apt-get install -q -y apache2 curl php5 mysql-server-5.5 php5-mysql php5-gd php5-xsl php5-intl php5-curl php-apc imagemagick pwgen nodejs nodejs-legacy ruby
 PROJECT_NAME="ezplatform"
 SITE_PATH="/Sites/$PROJECT_NAME"
 SITE_HTDOCS="$SITE_PATH"
@@ -13,11 +13,23 @@ if [ ! -d "$SITE_PATH" ] ;then
     mkdir -p "$SITE_PATH"
 fi
 
+gem install --no-ri --no-rdoc sass
+
 # Configure apache to read our config
 # echo "NameVirtualHost *:80" > /etc/apache2/conf-available/ezplatform.conf
 echo "ServerName $PROJECT_NAME.local" > /etc/apache2/conf-available/$PROJECT_NAME.conf
 echo "Include $SITE_PATH/conf/local.conf" >> /etc/apache2/conf-available/$PROJECT_NAME.conf
 a2enconf ezplatform
+
+echo 'date.timezone="America/Chicago"' > /etc/php5/apache2/conf.d/date.ini
+
+sed -e 's/memory_limit = .*/memory_limit = 1024M/' /etc/php5/apache2/conf.d/php.ini > /tmp/php.ini
+mv /tmp/php.ini /etc/php5/apache2/conf.d/php.ini
+
+# Add Swap
+/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+/sbin/mkswap /var/swap.1
+/sbin/swapon /var/swap.1
 
 # Switch apache process to the vagrant user
 chown vagrant /var/lock/apache2/

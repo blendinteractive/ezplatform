@@ -1,0 +1,59 @@
+doctrine:
+    dbal:
+        connections:
+            eng_repository_connection:
+                driver: pdo_mysql
+                host: localhost
+                user: ezplatform
+                password: foefieviachoob
+                dbname: ezplatform
+                charset: UTF8
+ez_publish_legacy:
+    enabled: true
+    system:
+        ezdemo_site_admin:
+            legacy_mode: true
+ezpublish:
+    imagemagick:
+        enabled: true
+        path: /usr/bin/convert
+    repositories:
+        eng_repository:
+            engine: legacy
+            connection: eng_repository_connection
+    siteaccess:
+        default_siteaccess: eng
+        list:
+            - ezdemo_site_user
+            - eng
+            - ezdemo_site_admin
+        groups:
+            ezdemo_site_group:
+                - ezdemo_site_user
+                - eng
+                - ezdemo_site_admin
+        match:
+            Map\Host:
+                admin.ezplatform.local: ezdemo_site_admin
+                ezplatform.local: ezdemo_site_user
+                eng.1: eng
+    system:
+        ezdemo_site_group:
+            repository: eng_repository
+            languages:
+                - eng-US
+            var_dir: var/ezdemo_site
+        eng:
+            session:
+                name: eZSESSID
+        ezdemo_site_admin: {  }
+        ezdemo_site_user:
+            session:
+                name: eZSESSID
+stash:
+    caches:
+        default:
+            drivers:
+                - FileSystem
+            inMemory: true
+            registerDoctrineAdapter: false

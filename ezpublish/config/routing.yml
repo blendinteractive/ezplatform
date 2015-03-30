@@ -26,3 +26,5 @@ _ezpublishPlatformUIRoutes:
 
 _ezpublishDemoRoutes:
     resource: "@eZDemoBundle/Resources/config/routing.yml"
+_ezpublishLegacyRoutes:
+    resource: @EzPublishLegacyBundle/Resources/config/routing.yml

@@ -15,6 +15,9 @@ security:
 #            stateless: true
 #            ezpublish_http_basic:
 #                realm: eZ Publish REST API
+        ezpublish_setup:
+            pattern: ^/ezsetup
+            security: false
 
         ezpublish_front:
             pattern: ^/
