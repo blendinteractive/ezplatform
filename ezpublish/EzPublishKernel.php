@@ -9,6 +9,7 @@
 
 use Egulias\ListenersDebugCommandBundle\EguliasListenersDebugCommandBundle;
 use eZ\Bundle\EzPublishCoreBundle\EzPublishCoreBundle;
+use eZ\Bundle\EzPublishLegacySearchEngineBundle\EzPublishLegacySearchEngineBundle;
 use eZ\Bundle\EzPublishDebugBundle\EzPublishDebugBundle;
 use eZ\Bundle\EzPublishIOBundle\EzPublishIOBundle;
 use eZ\Bundle\EzPublishRestBundle\EzPublishRestBundle;
@@ -40,6 +41,7 @@ use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Oneup\FlysystemBundle\OneupFlysystemBundle;
 use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
 use EzSystems\PlatformInstallerBundle\EzSystemsPlatformInstallerBundle;
+use EzSystems\PrivacyCookieBundle\EzSystemsPrivacyCookieBundle;
 
 class EzPublishKernel extends Kernel
 {
@@ -66,6 +68,7 @@ class EzPublishKernel extends Kernel
             new LiipImagineBundle(),
             new FOSHttpCacheBundle(),
             new EzPublishCoreBundle(),
+            new EzPublishLegacySearchEngineBundle(),
             new EzPublishIOBundle(),
             new EzSystemsDemoBundle(),
             new EzPublishRestBundle(),
@@ -78,6 +81,7 @@ class EzPublishKernel extends Kernel
             new KnpMenuBundle(),
             new OneupFlysystemBundle(),
             new EzSystemsPlatformInstallerBundle(),
+            new EzSystemsPrivacyCookieBundle(),
             new eZ\Bundle\EzPublishLegacyBundle\EzPublishLegacyBundle( $this )
         );
 
